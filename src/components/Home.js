@@ -1,7 +1,7 @@
+import React from "react";
 import Notes from "./Notes";
 
 export const Home = () => {
-
   return (
     <div>
       <h1>Add a Note</h1>
@@ -45,7 +45,6 @@ export const Home = () => {
           Submit
         </button>
       </form>
-
       <Notes/>
     </div>
   );
