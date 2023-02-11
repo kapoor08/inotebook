@@ -24,8 +24,8 @@ const NoteState = (props) => {
         "__v": 0
       },
       {
-        "_id": "63e68fca57182b551828d341",
-        "user": "63e4f441c817fe63cc809b28",
+        "_id": "63e68fca57182b55182d341",
+        "user": "63e4f441c857fe63cc809b28",
         "title": "New Note updated",
         "description": "Please acccess the playlist updated",
         "tag": "YouTube",
@@ -33,8 +33,8 @@ const NoteState = (props) => {
         "__v": 0
       },
       {
-        "_id": "63e68fca57182b551828d341",
-        "user": "63e4f441c817fe63cc809b28",
+        "_id": "63e68fca57182b55185d341",
+        "user": "63e4f441c817fe63cc800b28",
         "title": "New Note updated",
         "description": "Please acccess the playlist updated",
         "tag": "YouTube",
@@ -42,8 +42,8 @@ const NoteState = (props) => {
         "__v": 0
       },
       {
-        "_id": "63e68fca57182b551828d341",
-        "user": "63e4f441c817fe63cc809b28",
+        "_id": "63e68fca57187551828d341",
+        "user": "63e4f411c817fe63cc809b28",
         "title": "New Note updated",
         "description": "Please acccess the playlist updated",
         "tag": "YouTube",
@@ -51,8 +51,8 @@ const NoteState = (props) => {
         "__v": 0
       },
       {
-        "_id": "63e68fca57182b551828d341",
-        "user": "63e4f441c817fe63cc809b28",
+        "_id": "63e68fca1582b551828d341",
+        "user": "63e4f421c817fe63cc809b28",
         "title": "New Note updated",
         "description": "Please acccess the playlist updated",
         "tag": "YouTube",
