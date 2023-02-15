@@ -7,6 +7,8 @@ const NoteState = (props) => {
   const [notes, setNotes] = useState(notesInitial);
 
 
+
+
   //Get all notes
   const getNotes = async () => {
     //Todo API call
@@ -26,6 +28,8 @@ const NoteState = (props) => {
   }  
 
 
+
+
   //Add a Note
   const addNote = async (title, description, tag) => {
     //Todo API call
@@ -39,12 +43,10 @@ const NoteState = (props) => {
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNlNGY0NDFjODE3ZmU2M2NjODA5YjI4In0sImlhdCI6MTY3NTk2MjAxN30.SnFT28U8YEwKL9MOQnsg8YXQGWmX_R5W5YBQoc_2sfI",
         },
         body: JSON.stringify({title, description, tag})
-      }
-    );
-    const json = response.json();
+      });
+      const json = await response.json();
+      console.log(json);
 
-
-    console.log(json);
     const note = {
       _id: "63e535f2660b10668176005a",
       user: "63e4f441c817fe63cc809b28",
@@ -57,8 +59,24 @@ const NoteState = (props) => {
     setNotes(notes.concat(note));
   };
 
+
+
   //Delete a Note
-  const deleteNote = (id) => {
+  const deleteNote = async (id) => {
+    //Todo API call
+    const response = await fetch(
+      `${host}/api/notes/deletenote/${id}`,
+      {
+        method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token":
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNlNGY0NDFjODE3ZmU2M2NjODA5YjI4In0sImlhdCI6MTY3NTk2MjAxN30.SnFT28U8YEwKL9MOQnsg8YXQGWmX_R5W5YBQoc_2sfI",
+        }
+      });
+      const json = await response.json();
+      console.log(json);
+
     console.log("Deleting the note with id" + id);
     const newNotes = notes.filter((note) => {
       return note._id !== id;
@@ -66,13 +84,15 @@ const NoteState = (props) => {
     setNotes(newNotes);
   };
 
+
+
   //Edit a Note
   const editNote = async (id, title, description, tag) => {
     //API Call
     const response = await fetch(
-      `${host}/api/notes/updatenote/x ${id}`,
+      `${host}/api/notes/updatenote/${id}`,
       {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        method: "POST", 
         headers: {
           "Content-Type": "application/json",
           "auth-token":
@@ -96,7 +116,7 @@ const NoteState = (props) => {
   };
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes}}>
+    <NoteContext.Provider value={{notes, addNote, deleteNote, editNote, getNotes}}>
       {props.children}
     </NoteContext.Provider>
   );
