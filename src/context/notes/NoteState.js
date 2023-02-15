@@ -1,5 +1,5 @@
 import NoteContext from "./noteContext";
-import { useState } from "react";
+import { useState} from "react";
 
 const NoteState = (props) => {
   const host = "http://localhost:5000";
@@ -43,7 +43,8 @@ const NoteState = (props) => {
     );
     const json = response.json();
 
-    console.log("Adding a new note");
+
+    console.log(json);
     const note = {
       _id: "63e535f2660b10668176005a",
       user: "63e4f441c817fe63cc809b28",
@@ -69,7 +70,7 @@ const NoteState = (props) => {
   const editNote = async (id, title, description, tag) => {
     //API Call
     const response = await fetch(
-      `${host}/api/notes/updatenote/${id}`,
+      `${host}/api/notes/updatenote/x ${id}`,
       {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         headers: {
@@ -79,8 +80,9 @@ const NoteState = (props) => {
         },
         body: JSON.stringify({title, description, tag})
       }
-    );
-    const json = response.json();
+      );
+      const json = response.json();
+      console.log(json);
 
     //Logic to edit in client
     for (let index = 0; index < notes.length; index++) {
