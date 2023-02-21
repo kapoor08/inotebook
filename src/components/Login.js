@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
-
-const Login = () => {
-
+import { useNavigate } from "react-router-dom";
+const Login = (props) => {
+    const navigate = useNavigate();
     const [credentials, setCredentials] = useState({email: "", password: ""});
-    const [password, setPassword] = useState("");
+
     const onChange = (e) =>{
         setCredentials({...credentials, [e.target.name]: e.target.value});
     }
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
+
         const response = await fetch(
             "http://localhost:5000/api/auth/login",
             {
@@ -19,10 +20,13 @@ const Login = () => {
               },
               body: JSON.stringify({email: credentials.email, password: credentials.password})
             });
+
             const json = await response.json();
             console.log(json);
             if(json.success){
-
+                //Save the auth token and redirect 
+                localStorage.setItem("token", json.authToken);
+                navigate("/");
             }else{
                 alert("Invalid credentials");
             }
@@ -39,7 +43,7 @@ const Login = () => {
             <label htmlFor="password" className="form-label">Password</label>
             <input type="password" value={credentials.password} className="form-control" onChange={onChange} name="password" id="password"/>
         </div>
-        <button type="submit" className="btn btn-primary" >Submit</button>
+        <button type="submit" className="btn btn-primary">Submit</button>
         </form>   
     </div>
   );
