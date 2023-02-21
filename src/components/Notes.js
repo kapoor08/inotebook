@@ -2,14 +2,18 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import NoteItem from "./NoteItem";
 import noteContext from "../context/notes/noteContext";
 import AddNote from "./AddNote";
+import { useNavigate } from "react-router-dom";
 
-const Notes = () => {
+const Notes = (props) => {
   const context = useContext(noteContext);
   const { notes, getNotes, editNote} = context;
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
-    getNotes();
-    console.log(note);
+    if(localStorage.getItem("token")){
+      getNotes();
+    }
+    navigate.push("/login");
   }, []);
 
   const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: ""});
@@ -24,6 +28,7 @@ const Notes = () => {
     refClose.current.click();
     editNote(note.id, note.etitle, note.edescription, note.etag);
     console.log("Updating the note", note);
+    props.showAlert("Updated successfully", "success");
 }
 
 
@@ -38,7 +43,7 @@ const onChange = (e) =>{
 
   return (
     <>
-      <AddNote />
+      <AddNote showAlert={props.showAlert}/>
       <button type="button" ref={ref} className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal"> Launch demo modal</button>  
       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog">
@@ -84,7 +89,7 @@ const onChange = (e) =>{
         </div>
         {notes.map((note) => {
           return (
-            <NoteItem key={note._id} updateNote={updateNote} note={note} />
+            <NoteItem key={note._id} updateNote={updateNote} note={note} showAlert={props.showAlert}/>
           );
         })}
       </div>
